@@ -9,7 +9,7 @@ from datetime import date
 
 
 class OutageData:
-    df = pd.read_csv('USHC.csv')
+    df = pd.read_csv('monitiorgroup.csv')
 
     url = "https://accounts.zoho.com/oauth/v2/token"
     payload = "client_id=1000.F3ECHYKUK9ASR29PZ3RRKU5H8EE9UJ&client_secret=583fc4a3dd3aed419a479395ad32c0fb168632af94&refresh_token=1000.24a7e879923148a3c8c758c890a4d646.58bcfb73c2395339b0e0a3100de8de1a&grant_type=refresh_token"
