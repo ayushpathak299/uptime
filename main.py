@@ -6,7 +6,6 @@ import psycopg2
 import pandas as pd
 from datetime import datetime, timedelta
 from datetime import date
-
 from dotenv import load_dotenv
 import os
 
@@ -83,11 +82,11 @@ class OutageData:
 
 
             connection = psycopg2.connect(
-                host="jira-redash.c5ditj8vhg0k.us-west-1.rds.amazonaws.com",
-                database="jira",
-                user="redash",
-                password="N6ZrFz8KdR",
-                port = "5432"
+                host=os.getenv("DB_HOST"),
+                database=os.getenv("DB_NAME"),
+                user=os.getenv("DB_USER"),
+                password=os.getenv("DB_PASSWORD"),
+                port = os.getenv("DB_PORT")
                 )
             connection.autocommit = True
             cursor = connection.cursor()
