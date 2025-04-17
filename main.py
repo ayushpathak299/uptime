@@ -7,11 +7,22 @@ import pandas as pd
 from datetime import datetime, timedelta
 from datetime import date
 
+from dotenv import load_dotenv
+import os
+
+# Load environment variables
+load_dotenv()
 
 class OutageData:
     df = pd.read_csv('monitiorgroup.csv')
 
     url = "https://accounts.zoho.com/oauth/v2/token"
+    client_id = os.getenv("ZOHO_CLIENT_ID")
+    client_secret = os.getenv("ZOHO_CLIENT_SECRET")
+    refresh_token = os.getenv("ZOHO_REFRESH_TOKEN")
+
+    payload = f"client_id={client_id}&client_secret={client_secret}&refresh_token={refresh_token}&grant_type=refresh_token"
+
     payload = "client_id=1000.F3ECHYKUK9ASR29PZ3RRKU5H8EE9UJ&client_secret=583fc4a3dd3aed419a479395ad32c0fb168632af94&refresh_token=1000.24a7e879923148a3c8c758c890a4d646.58bcfb73c2395339b0e0a3100de8de1a&grant_type=refresh_token"
     headers = {
         'Content-Type': "application/x-www-form-urlencoded",
@@ -28,8 +39,9 @@ class OutageData:
         for n in range(int((end_date - start_date).days)):
             yield start_date + timedelta(n)
 
-    start_date = date(2025, 3,19)
-    end_date = end_date = date(2025, 4,16)#date(datetime.today().year, datetime.today().month, datetime.today().day)
+    yesterday = date.today() - timedelta(1)
+    start_date = yesterday
+    end_date = yesterday + timedelta(1)#date(datetime.today().year, datetime.today().month, datetime.today().day)
     for single_date in daterange(start_date, end_date):
         ldate = single_date.strftime("%Y-%m-%d")
         start_date = ldate
