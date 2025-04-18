@@ -33,4 +33,4 @@ jobs:
           pip install requests pandas psycopg2-binary python-dotenv
 
       - name: Run ETL Script
-        run: python your_script.py  # replace with your actual filename
+        run: python main.py  # replace with your actual filename
