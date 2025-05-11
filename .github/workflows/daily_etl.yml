@@ -2,7 +2,7 @@ name: Daily ETL Job
 
 on:
   schedule:
-    - cron: '30 20 * * *'  # 2:00 AM IST
+    - cron: '30 0 * * *'  # 6:00 AM IST
   workflow_dispatch:
 
 jobs:
