@@ -62,9 +62,11 @@ class OutageData:
 
     yesterday = date.today() - timedelta(1)
     start_date = yesterday
-    end_date = yesterday + timedelta(1)#date(datetime.today().year, datetime.today().month, datetime.today().day)
-    # start_date = date(2025, 4, 16)  # Start from 2025-01-01
-    # yesterday = date(2025, 4, 26)   # End at yesterday
+    end_date = yesterday + timedelta(1)
+    #date(datetime.today().year, datetime.today().month, datetime.today().day)
+
+    # start_date = date(2025, 5, 10)  # Start from 2025-01-01
+    # yesterday = date(2025, 5, 11)   # End at yesterday
     # end_date = yesterday
     total_records_inserted = 0
     for single_date in daterange(start_date, end_date):
@@ -169,9 +171,9 @@ class OutageData:
         cursor.execute(sqlquery3, (source, total_records_inserted, run_date))
         connection.commit()
         print(f"ETL status logged successfully with {total_records_inserted} total records.")
-        if total_records_inserted<17 :
+        if total_records_inserted<35 :
             send_failure_slack("records inserted less than expected")
-        if total_records_inserted>17 :
+        if total_records_inserted>35 :
             send_failure_slack("duplicate records are inserted")
 
 
